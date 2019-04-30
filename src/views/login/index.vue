@@ -76,7 +76,12 @@ export default {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
+          // 请求登录接口
+          // {res}
           this.$store.dispatch('Login', this.loginForm).then(() => {
+            // 执行获取路由
+            // localStorage.setItem
+
             this.loading = false
             this.$router.push({ path: '/' })
           }).catch(() => {
