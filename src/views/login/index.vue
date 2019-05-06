@@ -56,6 +56,7 @@ export default {
         username: 'admin',
         password: 'admin'
       },
+      // 校验规则
       loginRules: {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],
         password: [{ required: true, trigger: 'blur', validator: validatePass }]
@@ -72,17 +73,20 @@ export default {
         this.pwdType = 'password'
       }
     },
+    // 点击登录调用
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
           // 请求登录接口
           // {res}
+          // 将登陆数据存入store
           this.$store.dispatch('Login', this.loginForm).then(() => {
             // 执行获取路由
             // localStorage.setItem
 
             this.loading = false
+            // 登录成功之后重定向到首页
             this.$router.push({ path: '/' })
           }).catch(() => {
             this.loading = false

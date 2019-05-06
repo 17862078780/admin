@@ -12,6 +12,7 @@ const user = {
   mutations: {
     SET_TOKEN: (state, token) => {
       state.token = token
+      // setStore({ name: 'Authorization', content: state.token, type: 'session' })
     },
     SET_NAME: (state, name) => {
       state.name = name
@@ -50,6 +51,7 @@ const user = {
           const data = response.data
           commit('SET_ROLES', data.roles)
           commit('SET_NAME', data.name)
+          // 设置用户头像地址
           commit('SET_AVATAR', data.avatar)
           resolve(response)
         }).catch(error => {
