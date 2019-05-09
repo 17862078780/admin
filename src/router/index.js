@@ -3,9 +3,11 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 import Layout from '../views/layout/Layout'
-
+//所有权限通用路由表 
+//如首页和登录页和一些不用权限的公用页面
 export const constantRouterMap = [
   { path: '/login', component: () => import('@/views/login/index'), hidden: true },
+  { path: '/register', component: () => import('@/views/register/register'), hidden: true },
   { path: '/404', component: () => import('@/views/404'), hidden: true },
 
   {
@@ -57,7 +59,33 @@ export const constantRouterMap = [
 
   { path: '*', redirect: '/404', hidden: true }
 ]
-
+//异步挂载的路由
+//动态需要根据权限加载的路由表 
+export const asyncRouterMap = [
+  {
+    path: '/permission',
+    component: Layout,
+    name: 'permission',
+    alwaysShow: true,//是否始终显示跟菜单
+    meta: { role: ['admin', 'editor'], title: '权限测试页' }, //页面需要的权限
+    children: [
+      {
+        path: 'admin',
+        component: () => import('@/views/permission/admin'),
+        name: '权限测试页1',
+        meta: { role: ['admin'], title: 'admin显示' }  //页面需要的权限
+      },
+      {
+        path: 'editor',
+        component: () => import('@/views/permission/admin'),
+        name: '权限测试页2',
+        meta: { role: ['admin'], title: 'editor显示' }  //页面需要的权限
+      }
+    ]
+  },
+  { path: '*', redirect: '/404', hidden: true }
+];
+//实例化vue的时候只挂载constantRouter
 export default new Router({
   // mode: 'history', //后端支持可开
   scrollBehavior: () => ({ y: 0 }),
