@@ -23,22 +23,22 @@ export const constantRouterMap = [
   },
 
   {
-    path: '/example',
+    path: '/system',
     component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
-    meta: { title: '账户管理', icon: 'example' },
+    redirect: '/system/table',
+    name: 'system',
+    meta: { title: '系统管理', icon: 'example' },
     children: [
       {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
+        path: 'user',
+        name: 'user',
+        component: () => import('@/views/table/user'),
         meta: { title: '用户管理', icon: 'table' }
       },
       {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
+        path: 'role',
+        name: 'role',
+        component: () => import('@/views/table/role'),
         meta: { title: '角色管理', icon: 'tree' }
       }
     ]
